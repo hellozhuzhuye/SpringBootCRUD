@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    url: jdbc:mysql://47.112.105.123:3306/SpringBootCRUD?useUnicode=true&characterEncoding=utf8&useSSL=false
+    #    ?useUnicode=true&characterEncoding=UTF-8&serverTimezone=CST
+    username: root
+    password: 74110asd123.
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+
+
+
+#  # 配置thymeleaf，这里在templates文件夹下放html文件
+#thymeleaf:
+#  prefix: classpath:/templates/
+#  check-template-location: true
+#  suffix: .html
+#  mode: HTML
+#  encoding: UTF-8
+#  cache: false
+
+
+# spring集成Mybatis环境
+# 加载Mybatis映射文件
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+
+server:
+  port: 9091
