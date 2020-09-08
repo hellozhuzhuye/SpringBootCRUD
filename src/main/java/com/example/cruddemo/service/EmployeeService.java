@@ -25,4 +25,6 @@ public class EmployeeService {
         return employeeMapper.addEmp(emp);
     }
 
+    public Integer delEmpById(Integer id) { return employeeMapper.delEmpById(id);}
+
 }

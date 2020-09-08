@@ -38,5 +38,13 @@ public class EmployeeController {
             return "add emp fail";
     }
 
+    @RequestMapping(value = "/del/{id}",method = RequestMethod.GET)
+    public String delEmpById(@PathVariable Integer id){
+        if(employeeService.delEmpById(id)==1)
+            return "del emp success";
+        else
+            return "del emp fail";
+    }
+
 
 }

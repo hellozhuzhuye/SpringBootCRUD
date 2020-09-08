@@ -1,9 +1,8 @@
 package com.example.cruddemo.mapper;
 
 import com.example.cruddemo.bean.Employee;
-import com.example.cruddemo.bean.User;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
@@ -20,10 +19,9 @@ public interface EmployeeMapper{
     Employee getEmployeeById(Integer id);
 
 
-
     @Insert("insert into Employee(gender,name,email) values(#{gender},#{name},#{email})")
     Integer addEmp(Employee emp);
 
-
-
+    @Delete("delete from Employee where id = #{id}")
+    Integer delEmpById(Integer id);
 }
