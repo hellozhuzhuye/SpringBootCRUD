@@ -26,3 +26,4 @@ mybatis:
 
 server:
   port: 9091
+

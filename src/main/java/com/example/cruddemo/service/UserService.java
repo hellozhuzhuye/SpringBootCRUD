@@ -3,12 +3,15 @@ package com.example.cruddemo.service;
 import com.example.cruddemo.bean.User;
 import com.example.cruddemo.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     @Autowired
     UserMapper userMapper;
@@ -32,5 +35,17 @@ public class UserService {
 
     public Integer insertUser(User user){
         return userMapper.insertUser(user);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        User user = userMapper.getUserByUsername(s);
+        if (user == null)
+        {
+            throw new UsernameNotFoundException("用户名不存在！");
+        }
+
+        user.setRoles(userMapper.getUserRolesByUid(user.getId()));
+        return user;
     }
 }
