@@ -1,7 +1,6 @@
 package com.example.cruddemo.mapper;
 
 import com.example.cruddemo.bean.Employee;
-import com.example.cruddemo.bean.Role;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;

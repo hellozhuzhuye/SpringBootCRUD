@@ -1,7 +1,6 @@
 package com.example.cruddemo.bean;
 
 
-import org.intellij.lang.annotations.Pattern;
 
 public class Employee {
     private Integer id;
