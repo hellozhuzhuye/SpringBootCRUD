@@ -5,8 +5,10 @@ spring:
     username: root
     password: 74110asd123.
     driver-class-name: com.mysql.cj.jdbc.Driver
-
-
+#  mvc:
+#    hiddenmethod:
+#      filter:
+#        enabled: true
 
 
 

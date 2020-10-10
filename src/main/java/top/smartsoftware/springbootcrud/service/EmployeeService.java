@@ -28,6 +28,6 @@ public class EmployeeService {
 
     public Integer delEmpById(Integer id) { return employeeMapper.delEmpById(id);}
 
-    public Integer editEmpById(Integer id,Employee employee) { return employeeMapper.editEmpById(id,employee);}
+    public Integer editEmpById(Employee employee) { return employeeMapper.editEmpById(employee);}
 
 }

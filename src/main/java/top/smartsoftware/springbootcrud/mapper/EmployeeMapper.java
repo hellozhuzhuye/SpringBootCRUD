@@ -18,13 +18,14 @@ public interface EmployeeMapper{
 
 
     @Insert("insert into employee(gender,name,email) values(#{gender},#{name},#{email})")
+    @Options(useGeneratedKeys = true, keyProperty = "id")
     Integer addEmp(Employee emp);
 
     @Delete("delete from employee where id = #{id}")
     Integer delEmpById(Integer id);
 
-    @Update("update employee set gender=#{emp.gender},name=#{emp.name},email=#{emp.email} where id = #{id}")
-    Integer editEmpById(@Param("id")Integer id,@Param("emp")Employee emp);
+    @Update("update employee set gender=#{emp.gender},name=#{emp.name},email=#{emp.email} where id = #{emp.id}")
+    Integer editEmpById(@Param("emp")Employee emp);
 
 
 }
