@@ -1,12 +1,13 @@
-package com.example.cruddemo.controller;
+package top.smartsoftware.springbootcrud.controller;
 
-import com.example.cruddemo.bean.Employee;
-import com.example.cruddemo.bean.User;
-import com.example.cruddemo.service.EmployeeService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import top.smartsoftware.springbootcrud.bean.Employee;
+import top.smartsoftware.springbootcrud.service.EmployeeService;
 
 import java.util.List;
+
 
 @RestController
 @CrossOrigin
@@ -16,9 +17,9 @@ public class EmployeeController {
     @Autowired
     EmployeeService employeeService;
 
-    @RequestMapping("/emps")
+    @RequestMapping(value="/emps",method= RequestMethod.GET)
     public List<Employee> getEmployees(){
-        List<Employee> employeeList= employeeService.getAllEmployee();
+        List<Employee> employeeList= employeeService.getAllEmployees();
         return employeeList;
     }
 
@@ -42,6 +43,14 @@ public class EmployeeController {
             return "del emp success";
         else
             return "del emp fail";
+    }
+
+    @RequestMapping(value = "/edit/{id}",method = RequestMethod.POST)
+    public String editEmp(@PathVariable Integer id,Employee employee){
+        if(employeeService.editEmpById(id,employee)==1)
+            return "edit emp success";
+        else
+            return "edit emp fail";
     }
 
 

@@ -1,10 +1,16 @@
-package com.example.cruddemo.bean;
+package top.smartsoftware.springbootcrud.bean;
 
 public class Role {
 
     private Integer id;
     private String name;
     private String nameZh;
+
+    public Role(Integer id, String name, String nameZh) {
+        this.id = id;
+        this.name = name;
+        this.nameZh = nameZh;
+    }
 
     public Role() {
     }

@@ -9,21 +9,6 @@ spring:
 
 
 
-#  # 配置thymeleaf，这里在templates文件夹下放html文件
-#thymeleaf:
-#  prefix: classpath:/templates/
-#  check-template-location: true
-#  suffix: .html
-#  mode: HTML
-#  encoding: UTF-8
-#  cache: false
-
-
-# spring集成Mybatis环境
-# 加载Mybatis映射文件
-mybatis:
-  mapper-locations: classpath*:mapper/*.xml
 
 server:
-  port: 9091
-
+  port: 9999

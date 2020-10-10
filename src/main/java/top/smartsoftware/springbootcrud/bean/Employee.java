@@ -1,4 +1,4 @@
-package com.example.cruddemo.bean;
+package top.smartsoftware.springbootcrud.bean;
 
 
 
@@ -6,7 +6,6 @@ public class Employee {
     private Integer id;
     private String gender;
     private String name;
-
     private String email;
 
     public Employee() {

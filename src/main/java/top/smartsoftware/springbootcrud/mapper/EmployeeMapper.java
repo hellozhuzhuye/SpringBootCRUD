@@ -1,10 +1,8 @@
-package com.example.cruddemo.mapper;
+package top.smartsoftware.springbootcrud.mapper;
 
-import com.example.cruddemo.bean.Employee;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
+import top.smartsoftware.springbootcrud.bean.Employee;
 
 import java.util.List;
 
@@ -12,7 +10,7 @@ import java.util.List;
 public interface EmployeeMapper{
 
     @Select("select * from employee")
-    List<Employee> getAllEmployee();
+    List<Employee> getAllEmployees();
 
 
     @Select("select * from employee where id = #{id}")
@@ -24,6 +22,9 @@ public interface EmployeeMapper{
 
     @Delete("delete from employee where id = #{id}")
     Integer delEmpById(Integer id);
+
+    @Update("update employee set gender=#{emp.gender},name=#{emp.name},email=#{emp.email} where id = #{id}")
+    Integer editEmpById(@Param("id")Integer id,@Param("emp")Employee emp);
 
 
 }

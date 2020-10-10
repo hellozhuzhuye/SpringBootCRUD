@@ -1,25 +1,20 @@
-package com.example.cruddemo.config;
+package top.smartsoftware.springbootcrud.config;
 
-
-import com.example.cruddemo.bean.User;
-import com.example.cruddemo.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import top.smartsoftware.springbootcrud.service.UserService;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,20 +22,37 @@ import java.util.Map;
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    UserService userService;
-
     @Bean
-    PasswordEncoder passwordEncoder() {
+    PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
+    @Autowired
+    UserService userService;
+
+
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+
+
         auth.userDetailsService(userService);
+//        auth.inMemoryAuthentication()
+//                .withUser("admin").password("$2a$10$xAcjyGL.09bV7wJmRYm3e.QrNnlH5dP7TevGn98DUwjU.kv6yF.bu").roles("admin")
+//                .and()
+//                .withUser("user").password("$2a$10$xAcjyGL.09bV7wJmRYm3e.QrNnlH5dP7TevGn98DUwjU.kv6yF.bu").roles("user")
+//                .and()
+//                .withUser("emp").password("$2a$10$xAcjyGL.09bV7wJmRYm3e.QrNnlH5dP7TevGn98DUwjU.kv6yF.bu").roles("emp");
     }
 
 
+    @Bean
+    RoleHierarchy roleHierarchy(){
+        RoleHierarchyImpl roleHierarchy=new RoleHierarchyImpl();
+        String hierarchy="ROLE_admin > ROLE_user \n ROLE_user > ROLE_emp";
+        roleHierarchy.setHierarchy(hierarchy);
+        return roleHierarchy;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -81,9 +93,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     out.close();
                 })
                 .and()
+                .rememberMe()
+                .and()
                 .csrf().disable();
-
-
-
     }
 }

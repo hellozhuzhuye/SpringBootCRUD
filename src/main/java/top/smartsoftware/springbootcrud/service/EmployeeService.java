@@ -1,9 +1,10 @@
-package com.example.cruddemo.service;
+package top.smartsoftware.springbootcrud.service;
 
-import com.example.cruddemo.bean.Employee;
-import com.example.cruddemo.mapper.EmployeeMapper;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import top.smartsoftware.springbootcrud.bean.Employee;
+import top.smartsoftware.springbootcrud.mapper.EmployeeMapper;
 
 import java.util.List;
 
@@ -13,8 +14,8 @@ public class EmployeeService {
     @Autowired
     EmployeeMapper employeeMapper;
 
-    public List<Employee> getAllEmployee(){
-        return employeeMapper.getAllEmployee();
+    public List<Employee> getAllEmployees(){
+        return employeeMapper.getAllEmployees();
     }
 
     public Employee getEmployeeById(Integer id){
@@ -26,5 +27,7 @@ public class EmployeeService {
     }
 
     public Integer delEmpById(Integer id) { return employeeMapper.delEmpById(id);}
+
+    public Integer editEmpById(Integer id,Employee employee) { return employeeMapper.editEmpById(id,employee);}
 
 }
