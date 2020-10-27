@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsUtils;
 import top.smartsoftware.springbootcrud.service.UserService;
 
 import java.io.PrintWriter;
@@ -23,13 +24,12 @@ import java.util.Map;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
-    PasswordEncoder passwordEncoder(){
+    PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Autowired
     UserService userService;
-
 
 
     @Override
@@ -47,15 +47,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Bean
-    RoleHierarchy roleHierarchy(){
-        RoleHierarchyImpl roleHierarchy=new RoleHierarchyImpl();
-        String hierarchy="ROLE_admin > ROLE_user \n ROLE_user > ROLE_emp";
+    RoleHierarchy roleHierarchy() {
+        RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();
+        String hierarchy = "ROLE_admin > ROLE_user \n ROLE_user > ROLE_emp";
         roleHierarchy.setHierarchy(hierarchy);
         return roleHierarchy;
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http.authorizeRequests()
                 .antMatchers("/admin/**").hasRole("admin")
                 .antMatchers("/user/**").hasRole("user")
@@ -95,6 +96,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .rememberMe()
                 .and()
-                .csrf().disable();
+                //开启跨域
+                .cors()
+                .and()
+                .csrf()
+                .disable();
     }
 }
